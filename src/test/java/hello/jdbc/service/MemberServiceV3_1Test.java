@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import static hello.jdbc.connection.ConnectionConst.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 트랜잭션 - 트랜잭션 매니저
@@ -86,7 +85,7 @@ class MemberServiceV3_1Test {
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
         Member findMemberEX = memberRepository.findById(memberEX.getMemberId());
 
-        //memberA의 돈만 2000원 줄었고, ex의 돈은 10000원 그대로이다.
+        //memberA의 돈이 롤백 되어야함
         assertThat(findMemberA.getMoney()).isEqualTo(10000);
         assertThat(findMemberEX.getMoney()).isEqualTo(10000);
 

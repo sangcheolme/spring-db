@@ -3,9 +3,7 @@ package hello.jdbc.service;
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepositoryV3;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.support.AopUtils;
@@ -16,13 +14,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionManager;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
 import static hello.jdbc.connection.ConnectionConst.*;
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -120,7 +116,7 @@ class MemberServiceV3_3Test {
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
         Member findMemberEX = memberRepository.findById(memberEX.getMemberId());
 
-        //memberA의 돈만 2000원 줄었고, ex의 돈은 10000원 그대로이다.
+        //memberA의 돈이 롤백 되어야함
         assertThat(findMemberA.getMoney()).isEqualTo(10000);
         assertThat(findMemberEX.getMoney()).isEqualTo(10000);
     }

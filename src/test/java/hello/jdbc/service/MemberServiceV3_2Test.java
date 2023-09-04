@@ -85,7 +85,7 @@ class MemberServiceV3_2Test {
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
         Member findMemberEX = memberRepository.findById(memberEX.getMemberId());
 
-        //memberA의 돈만 2000원 줄었고, ex의 돈은 10000원 그대로이다.
+        //memberA의 돈이 롤백 되어야함
         assertThat(findMemberA.getMoney()).isEqualTo(10000);
         assertThat(findMemberEX.getMoney()).isEqualTo(10000);
 
